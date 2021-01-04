@@ -29,6 +29,7 @@ class _CartScreen extends State<CartScreen> {
 
   int totalprice = 0;
 
+  // this method is used to load cart of the customer
   loadCart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String user_id = prefs.getString('col_user_id') ?? '0';

@@ -55,6 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int cartcount = 0;
 
+
+  // this method is used to load the cart count in icon of main page
   loadCartCount() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String user_id = prefs.getString('col_user_id') ?? '0';
@@ -108,6 +110,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int isdataloaded;
   final databaseReference = FirebaseDatabase.instance.reference();
 
+
+  // this method is used to load products from database in main page
   loadProducts() async {
     setState(() {
       isdataloaded = 0;

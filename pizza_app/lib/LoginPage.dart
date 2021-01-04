@@ -301,6 +301,8 @@ class _LoginPage extends State<LoginPage> {
         ));
   }
 
+
+  // this method is user for login the user using mobile number and password
   void loginFunc() {
     databaseReference
         .child("Customers")

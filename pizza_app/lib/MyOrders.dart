@@ -33,6 +33,8 @@ class _MyOrders extends State<MyOrders> {
   int isdataloaded;
   final databaseReference = FirebaseDatabase.instance.reference();
 
+
+  // this method is used to load orders from database of the user
   loadOrders() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String user_id = prefs.getString('col_user_id') ?? '0';

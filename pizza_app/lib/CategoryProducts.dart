@@ -81,43 +81,38 @@ class _DbrHistory extends State<CategoryProducts> {
   int isdataloaded;
   final databaseReference = FirebaseDatabase.instance.reference();
 
+  // this method is used to load products according to category
   loadProducts() async {
     setState(() {
       isdataloaded = 0;
     });
-
-    if (productList.isNotEmpty) {
-      productList.clear();
-    }
     databaseReference.child("Products").once().then((DataSnapshot snapshot) {
       List result = snapshot.value;
       int _i = 1;
 
-      print(result);
       result.forEach((value) {
         //print(value);
         if (value != null) {
-          print("here");
-          Product product = Product(
-              value["productid"].toString(),
-              value["image"].toString(),
-              value["veg_non_veg"].toString(),
-              value["category_id"].toString(),
-              value["price"].toString(),
-              value["name"].toString(),
-              value["description"].toString(),
-              "0");
+          print(value["category_id"].toString());
+          print("line86");
+          if (value["category_id"].toString() ==
+              "${widget.categoryid.toString()}") {
+            Product product = Product(
+                value["productid"].toString(),
+                value["image"].toString(),
+                value["veg_non_veg"].toString(),
+                value["category_id"].toString(),
+                value["price"].toString(),
+                value["name"].toString(),
+                value["description"].toString(),
+                "0");
 
-          setState(() {
+            setState(() {
+              productList.add(product);
+            });
+          }
 
-            if(widget.categoryid.toString()==value["category_id"].toString())
-              {
-                productList.add(product);
-
-              }
-
-          });
-
+          // print(productList[0]);
 
           _i += 1;
         }
@@ -142,13 +137,9 @@ class _DbrHistory extends State<CategoryProducts> {
         .child("cart")
         .onValue
         .listen((event) {
-
       if (event.snapshot.value != null) {
-
-        if (event.snapshot.value.toString().contains("null") && event.snapshot.value.toString().contains("quantity")) {
-
-
-
+        if (event.snapshot.value.toString().contains("null") &&
+            event.snapshot.value.toString().contains("quantity")) {
           if (event.snapshot.value != null) {
             List result = event.snapshot.value;
 
@@ -157,23 +148,20 @@ class _DbrHistory extends State<CategoryProducts> {
             int i = 0;
             int quantity = 0;
             setState(() {
-              cartcount=0;
+              cartcount = 0;
             });
 
             for (i; i < result.length; i++) {
               if (result[i] != null) {
-
                 setState(() {
                   cartcount++;
                 });
               }
             }
           } else {}
-
-        }
-        else {
+        } else {
           setState(() {
-            cartcount=0;
+            cartcount = 0;
           });
           Map<dynamic, dynamic> values = event.snapshot.value;
           values.forEach((key, values) {
@@ -184,8 +172,6 @@ class _DbrHistory extends State<CategoryProducts> {
               });
             }
           });
-
-
         }
       } else {}
     });

@@ -315,7 +315,7 @@ class _MyOrders extends State<MyOrders> {
                                       Container(
                                         width: width * 0.25,
                                         height: height * 0.035,
-                                        child:  ordersList[index].orderstatus.toString().contains("Confirmed")?Text(
+                                        child:  ordersList[index].orderstatus.toString().contains("Delivered")?Text(
                                           'Pizza Delivered',
                                           style: TextStyle(
                                               fontSize: 14.0,

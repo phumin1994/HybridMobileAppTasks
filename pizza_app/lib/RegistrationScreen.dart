@@ -369,6 +369,8 @@ class _RegistrationScreen extends State<RegistrationScreen> {
   }
 
   int isdataloading;
+
+  // this method is used to register a user by taking the input from the user and insert data into database
   void registerFunc() {
 
     setState(() {
